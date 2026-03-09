@@ -486,12 +486,33 @@ public class WorldGuardBlockListener extends BlockListener
         final ConfigurationManager cfg = this.plugin.getGlobalStateManager();
         final WorldConfiguration wcfg = cfg.get(event.getBlock().getWorld());
         final Material type = event.getBlock().getType();
-        if (wcfg.disableIceMelting && type == Material.ICE) {
-            event.setCancelled(true);
-            return;
+
+        if (type.getId() == 79) // ice
+        {
+            if (wcfg.disableIceMelting && type == Material.ICE) {
+                event.setCancelled(true);
+                return;
+            }
+
+            // handle region-based melting flags
+            if (wcfg.useRegions && (!this.plugin.getGlobalRegionManager().allows(DefaultFlag.ICE_MELT, event.getBlock().getLocation())))
+            {
+                event.setCancelled(true);
+                return;
+            }
         }
-        if (wcfg.disableSnowMelting && type == Material.SNOW) {
-            event.setCancelled(true);
+
+        if (type.getId() == 78) // snow
+        {
+            if (wcfg.disableSnowMelting && type == Material.SNOW) {
+                event.setCancelled(true);
+            }
+
+            // handle region-based melting flags
+            if (wcfg.useRegions && (!this.plugin.getGlobalRegionManager().allows(DefaultFlag.SNOW_MELT, event.getBlock().getLocation()))) {
+                event.setCancelled(true);
+                return;
+            }
         }
     }
     

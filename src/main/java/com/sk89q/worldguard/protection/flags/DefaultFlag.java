@@ -43,6 +43,11 @@ public final class DefaultFlag
     public static final DoubleFlag PRICE;
     public static final SetFlag<String> BLOCKED_CMDS;
     public static final SetFlag<String> ALLOWED_CMDS;
+
+    // custom
+    public static final StateFlag ICE_MELT;
+    public static final StateFlag SNOW_MELT;
+
     public static final Flag<?>[] flagsList;
     
     private DefaultFlag() {
@@ -101,6 +106,11 @@ public final class DefaultFlag
         PRICE = new DoubleFlag("price");
         BLOCKED_CMDS = new SetFlag<String>("blocked-cmds", new CommandStringFlag(null));
         ALLOWED_CMDS = new SetFlag<String>("allowed-cmds", new CommandStringFlag(null));
+
+        // custom flags
+        ICE_MELT = new StateFlag("ice-melt", true);
+        SNOW_MELT = new StateFlag("snow-melt", true);
+
         flagsList = new Flag[] { DefaultFlag.PASSTHROUGH, DefaultFlag.BUILD, DefaultFlag.PVP, DefaultFlag.MOB_DAMAGE, DefaultFlag.MOB_SPAWNING, DefaultFlag.CREEPER_EXPLOSION, DefaultFlag.SLEEP, DefaultFlag.TNT, DefaultFlag.LIGHTER, DefaultFlag.FIRE_SPREAD, DefaultFlag.LAVA_FIRE, DefaultFlag.CHEST_ACCESS, DefaultFlag.WATER_FLOW, DefaultFlag.LAVA_FLOW, DefaultFlag.USE, DefaultFlag.PLACE_VEHICLE, DefaultFlag.GREET_MESSAGE, DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.NOTIFY_ENTER, DefaultFlag.NOTIFY_LEAVE, DefaultFlag.DENY_SPAWN, DefaultFlag.HEAL_DELAY, DefaultFlag.HEAL_AMOUNT, DefaultFlag.TELE_LOC, DefaultFlag.TELE_PERM, DefaultFlag.SPAWN_LOC, DefaultFlag.SPAWN_PERM, DefaultFlag.BUYABLE, DefaultFlag.PRICE, DefaultFlag.SNOW_FALL, DefaultFlag.LEAF_DECAY, DefaultFlag.GHAST_FIREBALL, DefaultFlag.BLOCKED_CMDS, DefaultFlag.ALLOWED_CMDS, DefaultFlag.ENTRY, DefaultFlag.ENTRY_PERM, DefaultFlag.EXIT, DefaultFlag.EXIT_PERM };
         DefaultFlag.ENTRY.setGroupFlag(DefaultFlag.ENTRY_PERM);
         DefaultFlag.EXIT.setGroupFlag(DefaultFlag.EXIT_PERM);
